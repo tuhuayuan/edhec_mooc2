@@ -1,0 +1,54 @@
+﻿FOR TXT FILE:
+
+DATA fivefactor_monthly (Label="五因子月度数据");
+Infile 'C:\fivefactor\fivefactor_monthly.txt' encoding="utf-8" 
+delimiter = '09'x Missover Dsd lrecl=32767 firstobs=2;
+Format trdmn $7.;
+Format mkt_rf best12.;
+Format smb best12.;
+Format hml best12.;
+Format umd best12.;
+Format rmw best12.;
+Format cma best12.;
+Format rf best12.;
+Format smb_equal best12.;
+Format hml_equal best12.;
+Format umd_equal best12.;
+Format rmw_equal best12.;
+Format cma_equal best12.;
+Informat trdmn $7.;
+Informat mkt_rf best12.;
+Informat smb best12.;
+Informat hml best12.;
+Informat umd best12.;
+Informat rmw best12.;
+Informat cma best12.;
+Informat rf best12.;
+Informat smb_equal best12.;
+Informat hml_equal best12.;
+Informat umd_equal best12.;
+Informat rmw_equal best12.;
+Informat cma_equal best12.;
+Label trdmn="交易日期";
+Label mkt_rf="市场风险因子";
+Label smb="规模风险因子";
+Label hml="账面市值比风险因子";
+Label umd="惯性因子";
+Label rmw="盈利能力因子";
+Label cma="投资模式因子";
+Label rf="无风险利率";
+Label smb_equal="（等权重）规模风险因子";
+Label hml_equal="（等权重）账面市值比风险因子";
+Label umd_equal="（等权重）惯性因子";
+Label rmw_equal="（等权重）盈利能力因子";
+Label cma_equal="（等权重）投资模式因子";
+Input trdmn $ mkt_rf smb  hml umd rmw cma rf smb_equal hml_equal umd_equal rmw_equal cma_equal;
+Run;
+
+
+FOR CSV FILE:
+
+PROC import out=fivefactor_monthly
+datafile="C:\fivefactor\fivefactor_monthly.csv"
+dbms=csv replace;
+run;
